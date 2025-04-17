@@ -29,12 +29,15 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 # Set working directory
 WORKDIR /var/www
 
+# Copy Laravel application files - ensure this is correctly copying the content
+COPY extracted/ .
+
 # Copy the NGINX template and entrypoint script
 COPY nginx.template.conf /etc/nginx/conf.d/nginx.template.conf
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Expose the port 
+# Expose the port - use the Heroku PORT
 EXPOSE ${PORT:-80}
 
 # Set environment variables for Laravel
