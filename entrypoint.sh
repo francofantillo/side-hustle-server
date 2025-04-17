@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Ensure PORT is set
+# Ensure PORT is set - use Heroku's PORT environment variable if available
 export PORT=${PORT:-80}
 echo "Using PORT: $PORT"
 
@@ -45,21 +45,23 @@ php artisan cache:clear
 # 3. Or implement conditional seeding that only runs on first deployment
 # =========================================================
 
-# Set up database - add the --force flag to run in production
-echo "Setting up database..."
-php artisan migrate:fresh --force
+# For Heroku, let's check the environment and only run migrations, not migrate:fresh
+if [ "$APP_ENV" == "production" ]; then
+    echo "Production environment detected, running only migrations..."
+    php artisan migrate --force
+else
+    echo "Setting up database..."
+    php artisan migrate:fresh --force
 
-# Seed initial data - add the --force flag to run in production
-echo "Seeding database with initial data..."
-php artisan db:seed --class=RolesTableSeeder --force
-php artisan db:seed --class=UsersTableSeeder --force
-php artisan db:seed --class=PlanSeeder --force
+    echo "Seeding database with initial data..."
+    php artisan db:seed --class=RolesTableSeeder --force
+    php artisan db:seed --class=UsersTableSeeder --force
+    php artisan db:seed --class=PlanSeeder --force
+fi
 # =========================================================
 
-# Create test files for debugging
-echo "<?php phpinfo(); ?>" > /var/www/public/info.php
-echo "Creating simple test files..."
-echo "<html><body><h1>Nginx Test Page</h1></body></html>" > /var/www/public/test.html
+# Create storage link if it doesn't exist
+php artisan storage:link
 
 # Start Nginx - use the full path and foreground mode for better reliability
 echo "Starting Nginx in foreground mode..."
