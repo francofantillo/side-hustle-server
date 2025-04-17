@@ -29,19 +29,20 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 # Set working directory
 WORKDIR /var/www
 
-# Copy the fixed composer.json first (one with forward slashes)
+# Copy essential Laravel files needed for Composer
 COPY extracted/composer.json extracted/composer.lock ./
+COPY extracted/artisan ./
+COPY extracted/bootstrap/ ./bootstrap/
+COPY extracted/config/ ./config/
+COPY extracted/app/ ./app/
 
-# Create the Helpers directory
-RUN mkdir -p app/Helpers
-
-# Copy the Helper.php file explicitly to make sure it exists
-COPY extracted/app/Helpers/Helper.php app/Helpers/
+# Make artisan executable
+RUN chmod +x artisan
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Copy remaining Laravel application files
+# Then copy the rest of the application files
 COPY extracted/ .
 
 # Copy the NGINX template and entrypoint script
