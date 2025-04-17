@@ -17,13 +17,13 @@ echo "Cleaning up Nginx configurations..."
 rm -f /etc/nginx/sites-enabled/default || true
 rm -f /etc/nginx/conf.d/default.conf || true
 
-# Generate Nginx config from template - explicitly substitute the PORT variable
+# Generate Nginx config from template - with proper variable substitution
 echo "Generating Nginx configuration with PORT=$PORT..."
-envsubst '$PORT' < /etc/nginx/conf.d/nginx.template.conf > /etc/nginx/conf.d/default.conf
+sed "s/\${PORT}/$PORT/g" /etc/nginx/conf.d/nginx.template.conf > /etc/nginx/conf.d/default.conf
 
 # Debug - check if the config has the correct port
 echo "Checking generated Nginx config:"
-cat /etc/nginx/conf.d/default.conf
+grep "listen" /etc/nginx/conf.d/default.conf
 
 # Make sure storage directories are writable
 echo "Setting directory permissions..."
@@ -38,9 +38,8 @@ echo "Clearing application caches..."
 php artisan config:clear || true
 php artisan cache:clear || true
 
-# Run migrations only in production, no fresh migrations to avoid data loss
-echo "Running database migrations..."
-php artisan migrate --force || true
+# Skip database migrations for now - uncomment when ready for database operations
+# php artisan migrate --force || true
 
 # Create storage link if it doesn't exist
 php artisan storage:link || true
