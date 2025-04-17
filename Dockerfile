@@ -30,20 +30,18 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 WORKDIR /var/www
 
 # Copy essential Laravel files needed for Composer
-COPY extracted/composer.json extracted/composer.lock ./
-COPY extracted/artisan ./
-COPY extracted/bootstrap/ ./bootstrap/
-COPY extracted/config/ ./config/
-COPY extracted/app/ ./app/
-
+# COPY extracted/composer.json extracted/composer.lock ./
+# COPY extracted/artisan ./
+# COPY extracted/bootstrap/ ./bootstrap/
+# COPY extracted/config/ ./config/
+# COPY extracted/app/ ./app/
+# Then copy the rest of the application files
+COPY extracted/ .
 # Make artisan executable
 RUN chmod +x artisan
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Then copy the rest of the application files
-COPY extracted/ .
 
 # Copy the NGINX template and entrypoint script
 COPY nginx.template.conf /etc/nginx/conf.d/nginx.template.conf
