@@ -29,22 +29,17 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 # Set working directory
 WORKDIR /var/www
 
-# Copy essential Laravel files needed for Composer
-# COPY extracted/composer.json extracted/composer.lock ./
-# COPY extracted/artisan ./
-# COPY extracted/bootstrap/ ./bootstrap/
-# COPY extracted/config/ ./config/
-# COPY extracted/app/ ./app/
-# Then copy the rest of the application files
+# Copy the entire application
 COPY extracted/ .
+
 # Make artisan executable
 RUN chmod +x artisan
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Install Node.js dependencies and build assets
-RUN npm ci && npm run build
+# Ensure proper permissions for public directory
+RUN chmod -R 755 public
 
 # Copy the NGINX template and entrypoint script
 COPY nginx.template.conf /templates/nginx.template.conf
@@ -58,5 +53,5 @@ EXPOSE ${PORT:-80}
 ENV APP_ENV=production
 ENV LOG_CHANNEL=errorlog
 
-# Run the entrypoint script ##
+# Run the entrypoint script
 CMD ["/usr/local/bin/entrypoint.sh"]

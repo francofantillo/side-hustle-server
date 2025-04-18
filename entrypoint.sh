@@ -12,6 +12,48 @@ echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/error-logging.in
 echo "log_errors = On" >> /usr/local/etc/php/conf.d/error-logging.ini
 echo "error_log = /dev/stderr" >> /usr/local/etc/php/conf.d/error-logging.ini
 
+# Comprehensive debugging for asset directories
+echo "DEBUGGING: Listing all directories in /var/www/public"
+find /var/www/public -type d | sort
+
+echo ""
+echo "DEBUGGING: Checking for specific missing files reported in logs"
+ls -la /var/www/public/admin/assets/vendor/fonts/boxicons.css 2>/dev/null || echo "boxicons.css not found"
+
+echo ""
+echo "DEBUGGING: Checking admin directory structure"
+if [ -d "/var/www/public/admin" ]; then
+    echo "✅ /var/www/public/admin directory exists"
+    echo "Contents of /var/www/public/admin:"
+    ls -la /var/www/public/admin
+    
+    if [ -d "/var/www/public/admin/assets" ]; then
+        echo "✅ /var/www/public/admin/assets directory exists"
+        echo "Contents of /var/www/public/admin/assets:"
+        ls -la /var/www/public/admin/assets
+        
+        if [ -d "/var/www/public/admin/assets/vendor" ]; then
+            echo "✅ /var/www/public/admin/assets/vendor directory exists"
+            echo "Contents of /var/www/public/admin/assets/vendor:"
+            ls -la /var/www/public/admin/assets/vendor
+            
+            if [ -d "/var/www/public/admin/assets/vendor/fonts" ]; then
+                echo "✅ /var/www/public/admin/assets/vendor/fonts directory exists"
+                echo "Contents of /var/www/public/admin/assets/vendor/fonts:"
+                ls -la /var/www/public/admin/assets/vendor/fonts
+            else
+                echo "❌ /var/www/public/admin/assets/vendor/fonts directory is MISSING!"
+            fi
+        else
+            echo "❌ /var/www/public/admin/assets/vendor directory is MISSING!"
+        fi
+    else
+        echo "❌ /var/www/public/admin/assets directory is MISSING!"
+    fi
+else
+    echo "❌ /var/www/public/admin directory is MISSING!"
+fi
+
 # Remove any existing default Nginx config that might conflict
 echo "Cleaning up Nginx configurations..."
 rm -f /etc/nginx/sites-enabled/default || true
