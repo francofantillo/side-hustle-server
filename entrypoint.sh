@@ -19,7 +19,7 @@ rm -f /etc/nginx/conf.d/default.conf || true
 
 # Generate Nginx config from template - with proper variable substitution
 echo "Generating Nginx configuration with PORT=$PORT..."
-envsubst '${PORT}' < /etc/nginx/conf.d/nginx.template.conf > /etc/nginx/conf.d/default.conf
+envsubst '$PORT' < /templates/nginx.template.conf > /etc/nginx/conf.d/default.conf
 
 # Debug - check if the config has the correct port
 echo "Checking generated Nginx config:"
@@ -51,7 +51,8 @@ NGINX_PID=$!
 
 # Start PHP-FPM
 echo "Starting PHP-FPM..."
-php-fpm -F
+php-fpm -F &
+PHP_FPM_PID=$!
 
 # Wait for any process to exit
-wait $NGINX_PID
+wait $NGINX_PID $PHP_FPM_PID

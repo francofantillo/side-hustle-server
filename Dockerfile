@@ -44,7 +44,7 @@ RUN chmod +x artisan
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Copy the NGINX template and entrypoint script
-COPY nginx.template.conf /etc/nginx/conf.d/nginx.template.conf
+COPY nginx.template.conf /templates/nginx.template.conf
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
