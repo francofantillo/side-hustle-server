@@ -44,6 +44,14 @@ php artisan cache:clear || true
 # Create storage link if it doesn't exist
 php artisan storage:link || true
 
+# Check if Vite manifest exists
+echo "Checking for Vite manifest..."
+if [ -f "public/build/manifest.json" ]; then
+    echo "Vite manifest found."
+else
+    echo "Warning: Vite manifest not found. CSS may not load correctly."
+fi
+
 # Start Nginx with the correct port
 echo "Starting Nginx on PORT=$PORT..."
 nginx -g 'daemon off;' &

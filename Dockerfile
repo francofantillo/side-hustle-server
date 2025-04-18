@@ -43,6 +43,9 @@ RUN chmod +x artisan
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# Install Node.js dependencies and build assets
+RUN npm ci && npm run build
+
 # Copy the NGINX template and entrypoint script
 COPY nginx.template.conf /templates/nginx.template.conf
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
