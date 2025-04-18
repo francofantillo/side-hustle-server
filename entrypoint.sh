@@ -19,7 +19,7 @@ rm -f /etc/nginx/conf.d/default.conf || true
 
 # Generate Nginx config from template - with proper variable substitution
 echo "Generating Nginx configuration with PORT=$PORT..."
-sed "s/\${PORT}/$PORT/g" /etc/nginx/conf.d/nginx.template.conf > /etc/nginx/conf.d/default.conf
+envsubst '${PORT}' < /etc/nginx/conf.d/nginx.template.conf > /etc/nginx/conf.d/default.conf
 
 # Debug - check if the config has the correct port
 echo "Checking generated Nginx config:"

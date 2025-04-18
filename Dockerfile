@@ -55,5 +55,5 @@ EXPOSE ${PORT:-80}
 ENV APP_ENV=production
 ENV LOG_CHANNEL=errorlog
 
-# Run the entrypoint script
+# Run the entrypoint script ##
 CMD ["/usr/local/bin/entrypoint.sh"]
