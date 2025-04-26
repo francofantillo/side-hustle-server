@@ -38,6 +38,9 @@ RUN chmod +x artisan
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# Build frontend assets
+RUN npm ci && npm run build
+
 # Ensure proper permissions for public directory
 RUN chmod -R 755 public
 
