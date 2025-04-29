@@ -13,21 +13,21 @@ class PlanSeeder extends Seeder
      */
     public function run(): void
     {
-        // Plan::create([
-        //     'product_id' => "price_1O7cPXDBTVUYOnmbGUaS3kLt",
-        //     'name'       => 'Post Per Day',
-        //     'price'      => '1',
-        // ]);
-        // Plan::create([
-        //     'product_id' => "price_1O7cPHDBTVUYOnmb215HoMA9",
-        //     'name'       => 'Post Per Week',
-        //     'price'      => '7',
-        // ]);
-        // Plan::create([
-        //     'product_id' => "price_1O7ZSPDBTVUYOnmbs0NlCIqz",
-        //     'name'       => 'Post Per Month',
-        //     'price'      => '30',
-        // ]);
+        Plan::create([
+            'product_id' => "price_1RJ8KvFVv0uquNwOEgcKaL2F",
+            'name'       => 'Post Per Day',
+            'price'      => '1',
+        ]);
+        Plan::create([
+            'product_id' => "price_1RJ8KVFVv0uquNwOEETPBpDD",
+            'name'       => 'Post Per Week',
+            'price'      => '7',
+        ]);
+        Plan::create([
+            'product_id' => "price_1RJ8KvFVv0uquNwOEgcKaL2F",
+            'name'       => 'Post Per Month',
+            'price'      => '30',
+        ]);
 
         Plan::create([
             'product_id' => "price_1P1sLZI5A9nxu5SN3xA1t7u0",
