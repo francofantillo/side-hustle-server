@@ -8,3 +8,4 @@ extracted/setup-mailgun-heroku-private.sh
 # Environment files with sensitive data
 .env.production
 .env.staging
+extracted/.DS_Store

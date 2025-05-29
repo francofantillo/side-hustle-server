@@ -67,7 +67,7 @@ FROM_EMAIL="postmaster@your-mailgun-domain-here"
 
 Then run the script:
 ```bash
-./extracted/setup-mailgun-heroku.sh
+./extracted/setup-mailgun-env-heroku.sh
 ```
 
 ### Option 2: Set manually
