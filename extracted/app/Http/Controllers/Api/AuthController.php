@@ -49,8 +49,7 @@ class AuthController extends Controller
                 $token    = $check_user_email->createToken('API Token')->plainTextToken;
 
                 try {
-                    $messageBody = env('APP_NAME')."\nNew OTP token is:$otpToken";
-                    $this->sendMessageToClient($check_user_email->phone, $messageBody);
+                    $this->sendOtpEmail($check_user_email, $otpToken);
     
                 } catch (\Exception $ex){
                     return $this->error($ex->getMessage());
@@ -113,8 +112,7 @@ class AuthController extends Controller
                 $user->save();
 
                 try {
-                    $messageBody = env('APP_NAME')."\nOTP token is:$otpToken";
-                    $this->sendMessageToClient($user->phone, $messageBody);
+                    $this->sendOtpEmail($user, $otpToken);
     
                 } catch (\Exception $ex){
                     return $this->error($ex->getMessage());
@@ -122,7 +120,7 @@ class AuthController extends Controller
     
                 return $this->success(array("otp" => $otpToken, "api_token" => $token,"user_id" => $user->id));
             } else {
-                return $this->error('Phone Number or Email is already exist...!!', 202);
+                return $this->error('Email or Phone Number is already exist...!!', 202);
             }
         } catch (\Exception $e) {
             //throw $th;
@@ -226,14 +224,13 @@ class AuthController extends Controller
             $user->save();
 
             try {
-                $messageBody = env('APP_NAME')."\nNew OTP token is:$otpToken";
-                $this->sendMessageToClient($user->phone, $messageBody);
+                $this->sendOtpEmail($user, $otpToken);
 
             } catch (\Exception $ex){
                 return $this->error($ex->getMessage());
             }
 
-            return $this->success(array("otp" => $otpToken), "OTP resent successfully");
+            return $this->success(array("otp" => $otpToken), "OTP resent successfully to your email");
       
         } else {
             return $this->error('Invalid User');
@@ -321,14 +318,14 @@ class AuthController extends Controller
     public function forgotPassword(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'phone'      => 'required',
+            'email'      => 'required|email',
         ]);
 
         if ($validator->fails()) {
             return $this->error('Validation Error', 200, [], $validator->errors());
         }
 
-        $user = User::where('phone', $request->phone)->first();
+        $user = User::where('email', $request->email)->first();
         if ($user != null) {
 
             $digits          = 6;
@@ -339,17 +336,16 @@ class AuthController extends Controller
             //$user->api_token = $user->createToken('API Token')->plainTextToken;
             $user->save();
             try {
-                $messageBody = env('APP_NAME')."\nOTP token is:$otpToken";
-                $this->sendMessageToClient($user->phone, $messageBody);
+                $this->sendOtpEmail($user, $otpToken);
 
             } catch (\Exception $ex){
                 return $this->error($ex->getMessage());
             }
 
             // $data = array('otp' => $user->otp, 'token' => $user->api_token);
-            return $this->success($user, 'OTP has been sent on your phone.');
+            return $this->success($user, 'OTP has been sent to your email.');
         }else {
-            return $this->error('Your Phone is not registered. Please Signup', 200);
+            return $this->error('Your email is not registered. Please sign up first.', 200);
         }
     }
 
