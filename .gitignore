@@ -1,1 +1,10 @@
-HEROKU_DEPLOYMENT_GUIDE.md
+# Files with sensitive information should be added here
+# Example: .env files, private keys, etc.
+
+# Ignore any setup scripts with actual credentials
+extracted/setup-mailgun-heroku-private.sh
+**/setup-*-private.sh
+
+# Environment files with sensitive data
+.env.production
+.env.staging
