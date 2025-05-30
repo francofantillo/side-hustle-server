@@ -68,4 +68,4 @@ CMD ["/usr/local/bin/entrypoint.sh"]
 #   MAIL_PASSWORD=your-app-password \
 #   MAIL_ENCRYPTION=tls \
 #   MAIL_FROM_ADDRESS=your-email@gmail.com \
-#   MAIL_FROM_NAME="Side Hustle App"
+#   MAIL_FROM_NAME="Phase 1 App"

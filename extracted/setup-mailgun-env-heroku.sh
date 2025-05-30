@@ -42,7 +42,7 @@ if [[ -z "$MAILGUN_DOMAIN" ]] || [[ -z "$MAILGUN_API_KEY" ]]; then
     echo "2. Set environment variables:"
     echo "   export MAILGUN_DOMAIN=\"your-sandbox-domain.mailgun.org\""
     echo "   export MAILGUN_SECRET=\"your-private-api-key\""
-    echo "   export MAIL_FROM_ADDRESS=\"postmaster@your-domain.mailgun.org\""
+    echo "   export MAIL_FROM_ADDRESS=\"postmaster@your-domain.com\""
     echo ""
     echo "3. Then run this script again"
     exit 1
@@ -55,7 +55,7 @@ echo ""
 # Configure for Mailgun API (not SMTP)
 heroku config:set MAIL_MAILER=mailgun
 heroku config:set MAIL_FROM_ADDRESS="${FROM_EMAIL}"
-heroku config:set MAIL_FROM_NAME="Side Hustle"
+heroku config:set MAIL_FROM_NAME="Phase 1"
 
 # Mailgun API Configuration
 heroku config:set MAILGUN_DOMAIN="${MAILGUN_DOMAIN}"
@@ -63,7 +63,7 @@ heroku config:set MAILGUN_SECRET="${MAILGUN_API_KEY}"
 heroku config:set MAILGUN_ENDPOINT="api.mailgun.net"
 
 # App name for email branding
-heroku config:set APP_NAME="Side Hustle"
+heroku config:set APP_NAME="Phase 1"
 
 echo ""
 echo "✅ Mailgun configuration complete!"

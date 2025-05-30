@@ -23,7 +23,7 @@ class MailgunService
         $apiKey = env('MAILGUN_SECRET');
         $this->domain = env('MAILGUN_DOMAIN');
         $this->fromEmail = env('MAIL_FROM_ADDRESS', 'noreply@yourdomain.com');
-        $this->fromName = env('MAIL_FROM_NAME', 'Side Hustle');
+        $this->fromName = env('MAIL_FROM_NAME', 'Phase 1');
 
         if (!$apiKey) {
             throw new Exception('MAILGUN_SECRET environment variable is required');

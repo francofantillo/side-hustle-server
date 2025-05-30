@@ -40,10 +40,10 @@ try {
     
     // Get configuration from .env
     $apiKey = $envVars['MAILGUN_SECRET'] ?? getenv('MAILGUN_SECRET') ?? 'your-mailgun-api-key-here';
-    $domain = $envVars['MAILGUN_DOMAIN'] ?? getenv('MAILGUN_DOMAIN') ?? 'sandboxbf9730c7f66f4f23bc209e8ed273588e.mailgun.org';
+    $domain = $envVars['MAILGUN_DOMAIN'] ?? getenv('MAILGUN_DOMAIN') ?? 'phase1app.com';
     $endpoint = $envVars['MAILGUN_ENDPOINT'] ?? getenv('MAILGUN_ENDPOINT') ?? 'api.mailgun.net';
     $fromAddress = $envVars['MAIL_FROM_ADDRESS'] ?? getenv('MAIL_FROM_ADDRESS') ?? "postmaster@{$domain}";
-    $fromName = $envVars['MAIL_FROM_NAME'] ?? getenv('MAIL_FROM_NAME') ?? 'Side Hustle';
+    $fromName = $envVars['MAIL_FROM_NAME'] ?? getenv('MAIL_FROM_NAME') ?? 'Phase 1';
     
     if ($apiKey === 'your-mailgun-api-key-here' || empty($apiKey)) {
         echo "❌ Error: MAILGUN_SECRET not found in .env file or environment\n";
@@ -72,18 +72,18 @@ try {
         $domain,
         [
             'from' => "{$fromName} <{$fromAddress}>",
-            'to' => 'Franco Fantillo <franco.fantillo@gmail.com>',
+            'to' => 'Franco Fantillo <franco_fantillo@hotmail.com>',
             'subject' => 'Hello Franco Fantillo - OTP Test',
-            'text' => "Hello Franco Fantillo,\n\nThis is a test email from your Side Hustle application using Mailgun!\n\nYour OTP verification system is working correctly.\n\nBest regards,\nSide Hustle Team",
+            'text' => "Hello Franco Fantillo,\n\nThis is a test email from your Phase 1 application using Mailgun!\n\nYour OTP verification system is working correctly.\n\nBest regards,\nPhase 1 Team",
             'html' => "
                 <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'>
                     <h2 style='color: #333;'>Hello Franco Fantillo!</h2>
-                    <p>This is a test email from your <strong>Side Hustle</strong> application using Mailgun!</p>
+                    <p>This is a test email from your <strong>Phase 1</strong> application using Mailgun!</p>
                     <div style='background-color: #f0f0f0; padding: 20px; margin: 20px 0; border-radius: 5px;'>
                         <h3 style='color: #007bff; margin: 0;'>✅ Email System Status: WORKING</h3>
                         <p style='margin: 10px 0 0 0;'>Your OTP verification system is now successfully configured with Mailgun.</p>
                     </div>
-                    <p>Best regards,<br><strong>Side Hustle Team</strong></p>
+                    <p>Best regards,<br><strong>Phase 1 Team</strong></p>
                 </div>
             "
         ]

@@ -1,6 +1,6 @@
-# 🚀 Side Hustle - Heroku Deployment Guide
+# 🚀 Phase 1 - Heroku Deployment Guide
 
-This guide will help you deploy your Side Hustle Laravel application with OTP email functionality to Heroku.
+This guide will help you deploy your Phase 1 Laravel application with OTP email functionality to Heroku.
 
 ## 📋 Prerequisites
 
@@ -62,7 +62,7 @@ nano extracted/setup-mailgun-heroku.sh
 # Update these variables:
 MAILGUN_DOMAIN="your-mailgun-domain-here"
 MAILGUN_API_KEY="your-mailgun-private-api-key-here"  
-FROM_EMAIL="postmaster@your-mailgun-domain-here"
+FROM_EMAIL="postmaster@phase1app.com"
 ```
 
 Then run the script:
@@ -73,8 +73,8 @@ Then run the script:
 ### Option 2: Set manually
 ```bash
 heroku config:set MAIL_MAILER=mailgun
-heroku config:set MAIL_FROM_ADDRESS="postmaster@your-mailgun-domain"
-heroku config:set MAIL_FROM_NAME="Side Hustle"
+heroku config:set MAIL_FROM_ADDRESS="postmaster@phase1app.com"
+heroku config:set MAIL_FROM_NAME="Phase 1"
 heroku config:set MAILGUN_DOMAIN="your-mailgun-domain"
 heroku config:set MAILGUN_SECRET="your-mailgun-private-api-key"
 heroku config:set MAILGUN_ENDPOINT="api.mailgun.net"
@@ -84,7 +84,7 @@ This will configure:
 - ✅ MAIL_MAILER=mailgun
 - ✅ MAILGUN_DOMAIN (your actual domain)
 - ✅ MAILGUN_SECRET (your private API key)
-- ✅ APP_NAME="Side Hustle"
+- ✅ APP_NAME="Phase 1"
 
 ## 🔑 Step 4: Set Additional Environment Variables
 
@@ -121,7 +121,7 @@ cat heroku.yml
 ### Commit your changes:
 ```bash
 git add .
-git commit -m "Deploy Side Hustle with OTP email system to Heroku"
+git commit -m "Deploy Phase 1 with OTP email system to Heroku"
 ```
 
 ### Deploy:
@@ -210,7 +210,7 @@ After deployment:
 1. **Monitor Mailgun**: https://app.mailgun.com/app/logs
 2. **Test OTP endpoints** using the curl commands above
 3. **Check email delivery** in your inbox
-4. **Verify branded emails** with "Side Hustle" branding
+4. **Verify branded emails** with "Phase 1" branding
 
 ## 🎯 Expected Results
 
@@ -218,7 +218,7 @@ After deployment:
 - ✅ PostgreSQL database connected
 - ✅ OTP emails sending via Mailgun
 - ✅ All API endpoints working
-- ✅ Branded "Side Hustle" emails
+- ✅ Branded "Phase 1" emails
 - ✅ Production-ready configuration
 
 ## 🔗 Useful Commands
@@ -242,4 +242,4 @@ heroku run php extracted/artisan config:cache
 heroku info
 ```
 
-Your Side Hustle app is now ready for production! 🚀
+Your Phase 1 app is now ready for production! 🚀

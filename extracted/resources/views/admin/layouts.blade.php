@@ -116,7 +116,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block">Side Hustle</span>
+                                                <span class="fw-semibold d-block">Phase 1</span>
                                                 <small class="text-muted">Admin</small>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                             <script>
                             document.write(new Date().getFullYear());</script>
                             , made with ❤️ by
-                            Side Hustle
+                            Phase 1
                         </div>
                     </div>
                 </footer>

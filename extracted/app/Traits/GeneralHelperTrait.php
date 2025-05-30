@@ -73,7 +73,7 @@ trait GeneralHelperTrait
             $apiKey = env('MAILGUN_SECRET');
             $domain = env('MAILGUN_DOMAIN');
             $fromEmail = env('MAIL_FROM_ADDRESS', 'noreply@yourdomain.com');
-            $fromName = env('MAIL_FROM_NAME', 'Side Hustle');
+            $fromName = env('MAIL_FROM_NAME', 'Phase 1');
 
             if (!$apiKey || !$domain) {
                 throw new Exception('Mailgun configuration missing. Please set MAILGUN_SECRET and MAILGUN_DOMAIN environment variables.');

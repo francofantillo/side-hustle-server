@@ -20,7 +20,7 @@ class SendOtpEmail extends Notification
     public function __construct($otp)
     {
         $this->otp = $otp;
-        $this->appName = env('APP_NAME', 'Side Hustle');
+        $this->appName = env('APP_NAME', 'Phase 1');
     }
 
     /**
